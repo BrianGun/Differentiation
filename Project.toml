@@ -1,0 +1,4 @@
+name = "Differentiation"
+uuid = "7d0d8038-6872-4e84-87fd-e64075dca3ec"
+authors = ["BrianGun <bguenter@microsoft.com>"]
+version = "0.1.0"
