@@ -1,5 +1,6 @@
 module Differentiation
 
+
 struct Variable
 end
 
@@ -13,14 +14,14 @@ function derivativeRules(f,x::Variable,y::Union{Variable,Nothing}=nothing)
 
 
     rules = Dict{Function,Function}(
-        (log->1/x),
-        (exp->exp(x)),
-        (Base.:^ -> n*x^(n-1)), #need a way to distinguish this, x^n, from x^y
-        (Base.:* -> (y,x)),
-        (Base.:+ -> (1,1)),
-        (Base.:- -> (1,-1)),
-        (Base.:/ -> (1/y,-x/y^2)),
-        (Base.:^ -> (y*x^(y-1),x^y*log(x))), #this is the x^y case
+        (log->(x::) -> 1/x),
+        (exp->(x) -> exp(x)),
+        (Base.:^ -> (x,n) -> n*x^(n-1)), #need a way to distinguish this, x^n, from x^y
+        (Base.:* -> (x,y) -> (y,x)),
+        (Base.:+ -> (x,y) -> (1,1)),
+        (Base.:- -> (x,y) -> (1,-1)),
+        (Base.:/ -> (x,y) -> (1/y,-x/y^2)),
+        (Base.:^ -> (x,y) -> y*x^(y-1),x^y*log(x))), #this is the x^y case
         (sin -> cos(x)),
         (cos -> -sin(x)),
         (tan -> sec(x)^2),
