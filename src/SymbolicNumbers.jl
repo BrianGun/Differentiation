@@ -1,3 +1,5 @@
+using Calculus
+
 const ReComp = Union{Real,Complex}
 
 struct SymbolicNumber{T<:ReComp} <: Number
@@ -7,6 +9,14 @@ end
 SymbolicNumber(x::S, y::T) where {S<:ReComp,T<:ReComp} = SymbolicNumber(promote(x,y)...)
 SymbolicNumber(x::ReComp) = SymbolicNumber(x, zero(x))
 SymbolicNumber{T}(x::ReComp) where T<:ReComp = SymbolicNumber{T}(T(x), zero(T))
+
+"""Not working"""
+macro variable(a)
+    return quote
+        const $a = Variable($a)
+    end
+end
+
 
 const ɛ = SymbolicNumber(false, true)
 const imɛ = SymbolicNumber(Complex(false, false), Complex(false, true))
